@@ -30,7 +30,7 @@ import { getColor, getHsv } from "./utils/utils.js";
 import { Color } from "./utils/color.js";
 import { SavedColor } from "./utils/saved-color.js";
 import { MyPreferencesWindow } from "./preferences.js";
-import { savedColorsFile } from "./main.js";
+import { savedColorsFile } from "./application.js";
 
 const xdpPortal = Xdp.Portal.new();
 
