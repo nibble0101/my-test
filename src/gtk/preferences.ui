@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.10" />
+  <requires lib="Adw" version="1.0" />
+  <template class="MyPreferencesWindow" parent="AdwPreferencesWindow">
+    <property name="default_width">300</property>
+    <property name="default_height">400</property>
+    <property name="modal">true</property>
+    <property name="title">Preferences</property>
+    <property name="destroy_with_parent">true</property>
+    <child>
+      <object class="AdwPreferencesPage">
+        <property name="name">preferences</property>
+        <property name="title">Preferences</property>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title">Theme</property>
+            <property name="description">Color theme</property>
+            <child>
+              <object class="AdwPreferencesRow">
+                <style>
+                  <class name="preferred-color-scheme-row" />
+                </style>
+                <property name="title">Color theme</property>
+                <property name="title_selectable">true</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="orientation">horizontal</property>
+                    <property name="valign">3</property>
+                    <property name="halign">0</property>
+                    <property name="hexpand">true</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="orientation">horizontal</property>
+                        <property name="valign">3</property>
+                        <property name="halign">1</property>
+                        <property name="hexpand">true</property>
+                        <child>
+                          <object class="GtkCheckButton" id="system">
+                            <property name="label">System</property>
+                            <property name="active">true</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="orientation">horizontal</property>
+                        <property name="valign">3</property>
+                        <property name="halign">3</property>
+                        <property name="hexpand">true</property>
+                        <child>
+                          <object class="GtkCheckButton" id="light">
+                            <property name="label">Light</property>
+                            <property name="group">system</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="orientation">horizontal</property>
+                        <property name="valign">3</property>
+                        <property name="halign">2</property>
+                        <property name="hexpand">true</property>
+                        <child>
+                          <object class="GtkCheckButton" id="dark">
+                            <property name="label">Dark</property>
+                            <property name="group">system</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

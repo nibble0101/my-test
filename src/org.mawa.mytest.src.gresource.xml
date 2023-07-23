@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/org/mawa/mytest/js">
+    <file>main.js</file>
+    <file>window.js</file>
+    <file>preferences.js</file>
+    <file>utils/utils.js</file>
+    <file>utils/color.js</file>
+    <file>utils/saved-color.js</file>
+  </gresource>
+</gresources>

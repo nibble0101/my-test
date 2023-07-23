@@ -1,0 +1,6 @@
+data/org.mawa.mytest.desktop.in
+data/org.mawa.mytest.appdata.xml.in
+data/org.mawa.mytest.gschema.xml
+src/main.js
+src/window.js
+src/window.ui

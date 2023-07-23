@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=my-test
+Exec=org.mawa.mytest
+Icon=org.mawa.mytest
+Terminal=false
+Type=Application
+Categories=GTK;
+StartupNotify=true

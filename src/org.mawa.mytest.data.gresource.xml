@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/org/mawa/mytest">
+    <file preprocess="xml-stripblanks">window.ui</file>
+    <file preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
+    <file preprocess="xml-stripblanks">gtk/color-list-view.ui</file>
+    <file preprocess="xml-stripblanks">gtk/column-view.ui</file>
+    <file preprocess="xml-stripblanks">gtk/name-column.ui</file>
+    <file preprocess="xml-stripblanks">gtk/actions-column.ui</file>
+    <file preprocess="xml-stripblanks">gtk/preferences.ui</file>
+    <file>image/test.svg</file>
+    <file>image/eye-dropper.svg</file>
+    <file>styles/index.css</file>
+  </gresource>
+</gresources>
