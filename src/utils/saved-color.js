@@ -43,8 +43,8 @@ export const SavedColor = GObject.registerClass(
         GObject.ParamFlags.READWRITE,
         ""
       ),
-      rgbPercent: GObject.ParamSpec.string(
-        "rgbPercent",
+      rgb_percent: GObject.ParamSpec.string(
+        "rgb_percent",
         "RgbPercent",
         "Picked color in RGB percent format",
         GObject.ParamFlags.READWRITE,
@@ -75,13 +75,13 @@ export const SavedColor = GObject.registerClass(
     },
   },
   class SavedColor extends GObject.Object {
-    constructor({ id, name, hex, rgb, rgbPercent, hsl, hsv }) {
+    constructor({ id, name, hex, rgb, rgb_percent, hsl, hsv }) {
       super();
       this.id = GLib.Variant.new_string(id);
       this.name = name;
       this.hex = hex;
       this.rgb = rgb;
-      this.rgbPercent = rgbPercent;
+      this.rgb_percent = rgb_percent;
       this.hsl = hsl;
       this.hsv = hsv;
       this.visible = GLib.Variant.new_string(hex);

@@ -100,9 +100,6 @@
                                           <object class="GtkStack" id="picked_colors_stack">
                                             <property name="transition_type">crossfade</property>
                                             <property name="transition-type">1</property>
-                                            <binding name="visible-child-name">
-                                              <lookup name="saved_colors_visible_stack_page">MyTestWindow</lookup>
-                                            </binding>
                                             <child>
                                               <object class="GtkStackPage" id="no_saved_colors_stack_page">
                                                 <property name="name">no_saved_colors_stack_page</property>

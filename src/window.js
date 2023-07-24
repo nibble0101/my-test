@@ -33,6 +33,7 @@ import { MyPreferencesWindow } from "./preferences.js";
 import { savedColorsFile } from "./application.js";
 
 const xdpPortal = Xdp.Portal.new();
+const colorFormats = ["name", "hex", "rgb", "rgb_percent", "hsl", "hsv"];
 
 export const MyTestWindow = GObject.registerClass(
   {
@@ -46,6 +47,7 @@ export const MyTestWindow = GObject.registerClass(
       "picked_color_display",
       "toast_overlay",
       "saved_colors_selection_model",
+      "picked_colors_stack",
     ],
     Properties: {
       btn_label: GObject.ParamSpec.string(
@@ -61,13 +63,6 @@ export const MyTestWindow = GObject.registerClass(
         "The visible stack page",
         GObject.ParamFlags.READWRITE,
         "main_page"
-      ),
-      saved_colors_visible_stack_page: GObject.ParamSpec.string(
-        "saved_colors_visible_stack_page",
-        "savedColorsVisibleStackPage",
-        "The saved colors visible stack page",
-        GObject.ParamFlags.READWRITE,
-        "no_saved_colors_stack_page"
       ),
       settings: GObject.ParamSpec.object(
         "settings",
@@ -118,14 +113,41 @@ export const MyTestWindow = GObject.registerClass(
       this._selection_model.model = Gio.ListStore.new(Color);
       this._saved_colors_selection_model.model = Gio.ListStore.new(SavedColor);
       this.toast = new Adw.Toast({ timeout: 1 });
-      this.pickedColors = [];
       this.getSavedColors();
 
-      this.updateSavedColorsPageView();
+      this._saved_colors_selection_model.model.bind_property_full(
+        "n_items",
+        this._picked_colors_stack,
+        "visible-child-name",
+        GObject.BindingFlags.DEFAULT | GObject.BindingFlags.SYNC_CREATE,
+        (_, numItems) => {
+          const visiblePage = numItems
+            ? "saved_colors_stack_page_inner"
+            : "no_saved_colors_stack_page";
+          return [true, visiblePage];
+        },
+        null
+      );
     }
 
     vfunc_close_request() {
-      this.saveData(this.pickedColors);
+      const { model } = this._saved_colors_selection_model;
+      const length = model.get_n_items();
+
+      const pickedColors = [];
+
+      for (let idx = 0; idx < length; idx++) {
+        const item = model.get_item(idx);
+        const pickedColor = { id: item.id.unpack() };
+
+        for (const format of colorFormats) {
+          pickedColor[format] = item[format];
+        }
+
+        pickedColors.push(pickedColor);
+      }
+
+      this.saveData(pickedColors);
     }
 
     init = () => {
@@ -200,8 +222,6 @@ export const MyTestWindow = GObject.registerClass(
         }
 
         this._saved_colors_selection_model.model.remove(idx);
-        this.pickedColors.splice(idx, 1);
-        this.updateSavedColorsPageView();
         this.displayToast("Deleted saved color successfully");
       });
 
@@ -213,15 +233,7 @@ export const MyTestWindow = GObject.registerClass(
           throw new Error(`id: ${id} is non-existent`);
         }
 
-        const pickedColorArr = [
-          { desc: "Name", val: item.name },
-          { desc: "RGB", val: item.rgb },
-          { desc: "HEX", val: item.hex },
-          { desc: "RGB PERCENT", val: item.rgbPercent },
-          { desc: "HSV", val: item.hsv },
-        ];
-
-        this.updatePickedColor(pickedColorArr);
+        this.updatePickedColor(item);
 
         const css = `.picked-color-display{ background-color: ${item.rgb}; }`;
 
@@ -271,35 +283,21 @@ export const MyTestWindow = GObject.registerClass(
             scaledRgb[i] = gVariant.get_child_value(i).get_double();
           }
 
-          const { rgb, rgbHex, rgbPercent } = getColor(scaledRgb);
+          const { name, rgb, rgb_percent, hex, hsl } = getColor(scaledRgb);
           const hsv = getHsv(Gtk.rgb_to_hsv(...scaledRgb));
 
-          const pickedColorArr = [
-            { desc: "Name", val: "Yellow" },
-            { desc: "RGB", val: rgb },
-            { desc: "HEX", val: rgbHex },
-            { desc: "RGB PERCENT", val: rgbPercent },
-            { desc: "HSV", val: hsv },
-          ];
-
-          this.updatePickedColor(pickedColorArr);
-
-          const savedColor = {
+          const pickedColor = {
             id: GLib.uuid_string_random(),
-            name: "Yellow",
-            hex: rgbHex,
+            name,
+            hex,
             rgb,
-            rgbPercent,
+            rgb_percent,
             hsv,
+            hsl,
           };
 
-          this.pickedColors.push(savedColor);
-
-          this._saved_colors_selection_model.model.append(
-            new SavedColor(savedColor)
-          );
-
-          this.updateSavedColorsPageView();
+          this.updatePickedColor(pickedColor);
+          this.updateSavedColors(pickedColor);
 
           const css = `.picked-color-display{ background-color: ${rgb}; }`;
 
@@ -351,32 +349,25 @@ export const MyTestWindow = GObject.registerClass(
     };
 
     getSavedColors = () => {
-      const fileExists = GLib.file_test(
-        savedColorsFile.get_path(),
-        GLib.FileTest.EXISTS
-      );
+      const filePath = savedColorsFile.get_path();
+      const fileExists = GLib.file_test(filePath, GLib.FileTest.EXISTS);
 
       if (fileExists) {
-        const [success, arrBuff] = GLib.file_get_contents(
-          savedColorsFile.get_path()
-        );
+        const [success, arrBuff] = GLib.file_get_contents(filePath);
 
         if (success) {
           const decoder = new TextDecoder("utf-8");
-          const pickedColors = decoder.decode(arrBuff);
-          this.pickedColors = this.pickedColors.concat(
-            JSON.parse(pickedColors)
-          );
+          const pickedColors = JSON.parse(decoder.decode(arrBuff));
 
-          for (const pickedColor of this.pickedColors) {
-            this._saved_colors_selection_model.model.append(
-              new SavedColor(pickedColor)
-            );
+          const { model } = this._saved_colors_selection_model;
+
+          for (const pickedColor of pickedColors) {
+            model.append(new SavedColor(pickedColor));
           }
-          return;
+        } else {
+          console.log("Failed to read saved data");
         }
 
-        console.log("Failed to read saved data");
         return;
       }
 
@@ -416,14 +407,6 @@ export const MyTestWindow = GObject.registerClass(
       this._toast_overlay.add_toast(this.toast);
     };
 
-    updateSavedColorsPageView = () => {
-      const visiblePageName =
-        this._saved_colors_selection_model.model.get_n_items()
-          ? "saved_colors_stack_page_inner"
-          : "no_saved_colors_stack_page";
-      this.saved_colors_visible_stack_page = visiblePageName;
-    };
-
     copyToClipboard = (text) => {
       const clipboard = this.display.get_clipboard();
       const contentProvider = Gdk.ContentProvider.new_for_value(text);
@@ -431,10 +414,11 @@ export const MyTestWindow = GObject.registerClass(
     };
 
     getItem = (id) => {
-      const length = this._saved_colors_selection_model.model.get_n_items();
+      const { model } = this._saved_colors_selection_model;
+      const length = model.get_n_items();
 
       for (let idx = 0; idx < length; idx++) {
-        const item = this._saved_colors_selection_model.model.get_item(idx);
+        const item = model.get_item(idx);
 
         if (item.id.unpack() === id) {
           return [idx, item];
@@ -444,11 +428,17 @@ export const MyTestWindow = GObject.registerClass(
       return [null, null];
     };
 
-    updatePickedColor = (pickedColorArr = []) => {
-      this._selection_model.model.remove_all();
+    updateSavedColors = (pickedColor = {}) => {
+      const { model } = this._saved_colors_selection_model;
+      model.append(new SavedColor(pickedColor));
+    };
 
-      for (const { desc, val } of pickedColorArr) {
-        this._selection_model.model.append(new Color(desc, val));
+    updatePickedColor = (pickedColor = {}) => {
+      const { model } = this._selection_model;
+      model.remove_all();
+
+      for (const format of colorFormats) {
+        model.append(new Color(format, pickedColor[format]));
       }
     };
   }

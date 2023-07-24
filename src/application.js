@@ -38,7 +38,7 @@ export const savedColorsFile = Gio.File.new_for_path(
   ])
 );
 
-const URL = 'https://www.github.com/nibble0101/'
+const URL = "https://www.github.com/nibble0101/";
 
 export const MyTestApplication = GObject.registerClass(
   class MyTestApplication extends Adw.Application {
@@ -60,16 +60,16 @@ export const MyTestApplication = GObject.registerClass(
     }
 
     initActions = () => {
-      const quit_action = new Gio.SimpleAction({ name: "quit" });
-      quit_action.connect("activate", (action) => {
+      const quitAction = new Gio.SimpleAction({ name: "quit" });
+      quitAction.connect("activate", (action) => {
         this.quit();
       });
-      this.add_action(quit_action);
+      this.add_action(quitAction);
       this.set_accels_for_action("app.quit", ["<primary>q"]);
 
-      const show_about_action = new Gio.SimpleAction({ name: "about" });
-      show_about_action.connect("activate", this.showAbout);
-      this.add_action(show_about_action);
+      const aboutAction = new Gio.SimpleAction({ name: "about" });
+      aboutAction.connect("activate", this.showAbout);
+      this.add_action(aboutAction);
     };
 
     showAbout = () => {
