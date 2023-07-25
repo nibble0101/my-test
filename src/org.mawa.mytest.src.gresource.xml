@@ -8,5 +8,6 @@
     <file>utils/utils.js</file>
     <file>utils/color.js</file>
     <file>utils/saved-color.js</file>
+    <file>utils/color-names.js</file>
   </gresource>
 </gresources>
