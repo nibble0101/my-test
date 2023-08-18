@@ -6,13 +6,13 @@ export function getColor(scaledRgb) {
     rgb_percent = [];
 
   for (const value of scaledRgb) {
-    rgb.push(round(value * 255, 1));
+    rgb.push(round(value * 255));
     hex.push(
       round(value * 255)
         .toString(16)
         .padStart(2, "0")
     );
-    rgb_percent.push(`${round(value * 100, 1)}%`);
+    rgb_percent.push(`${round(value * 100)}%`);
   }
 
   const hsl = rgbToHsl(scaledRgb);
@@ -29,9 +29,9 @@ export function getColor(scaledRgb) {
 }
 
 export function getHsv([hue, saturation, value]) {
-  const scaledHue = round(hue * 360, 1);
-  const scaledSaturation = round(saturation * 100, 1);
-  const scaledValue = round(value * 100, 1);
+  const scaledHue = round(hue * 360);
+  const scaledSaturation = round(saturation * 100);
+  const scaledValue = round(value * 100);
 
   return `hsv(${scaledHue}, ${scaledSaturation}%, ${scaledValue}%)`;
 }
@@ -64,7 +64,7 @@ export function rgbToHsl([r, g, b]) {
     }
     h /= 6;
   }
-  return [round(h * 360, 1), round(s * 100, 1), round(l * 100, 1)];
+  return [round(h * 360), round(s * 100), round(l * 100)];
 }
 
 export function round(number, decimalPlaces = 0) {
