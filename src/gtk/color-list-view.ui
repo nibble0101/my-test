@@ -20,7 +20,7 @@
         </child>
         <child>
           <object class="GtkEntry">
-            <property name="editable">false</property>
+            <property name="editable">true</property>
             <property name="buffer">
               <object class="GtkEntryBuffer">
                 <binding name="text">
