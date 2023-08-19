@@ -11,9 +11,6 @@
         <property name="child">
           <object class="GtkStack" id="main_stack">
             <property name="transition-type">1</property>
-            <binding name="visible-child-name">
-              <lookup name="visible_stack_page">MyTestWindow</lookup>
-            </binding>
             <child>
               <object class="GtkStackPage" id="main_page">
                 <property name="name">main_page</property>

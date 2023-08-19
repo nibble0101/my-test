@@ -57,13 +57,6 @@ export const MyTestWindow = GObject.registerClass(
         GObject.ParamFlags.READWRITE,
         ""
       ),
-      visible_stack_page: GObject.ParamSpec.string(
-        "visible_stack_page",
-        "visibleStackPage",
-        "The visible stack page",
-        GObject.ParamFlags.READWRITE,
-        "main_page"
-      ),
       settings: GObject.ParamSpec.object(
         "settings",
         "Settings",
@@ -109,6 +102,8 @@ export const MyTestWindow = GObject.registerClass(
         this.setPreferredColorScheme
       );
       this.createActions();
+
+      // Initialize when the app starts
       this.setPreferredColorScheme();
       this._selection_model.model = Gio.ListStore.new(Color);
       this._saved_colors_selection_model.model = Gio.ListStore.new(SavedColor);
@@ -240,7 +235,7 @@ export const MyTestWindow = GObject.registerClass(
         const cssProvider = new Gtk.CssProvider();
         cssProvider.load_from_data(css, -1);
 
-        this.visible_stack_page = "picked_color_page";
+        this._main_stack.visible_child_name = "picked_color_page";
 
         const styleContext = this._picked_color_display.get_style_context();
         styleContext.add_provider(
@@ -304,7 +299,7 @@ export const MyTestWindow = GObject.registerClass(
           const cssProvider = new Gtk.CssProvider();
           cssProvider.load_from_data(css, -1);
 
-          this.visible_stack_page = "picked_color_page";
+          this._main_stack.visible_child_name = "picked_color_page";
 
           const styleContext = this._picked_color_display.get_style_context();
           styleContext.add_provider(
@@ -325,7 +320,7 @@ export const MyTestWindow = GObject.registerClass(
     };
 
     backToHomePageHandler = () => {
-      this.visible_stack_page = "main_page";
+      this._main_stack.visible_child_name = "main_page";
     };
 
     setPreferredColorScheme = () => {
