@@ -9,5 +9,6 @@
     <file>utils/color.js</file>
     <file>utils/saved-color.js</file>
     <file>utils/color-names.js</file>
+    <file>utils/nearest-color.js</file>
   </gresource>
 </gresources>

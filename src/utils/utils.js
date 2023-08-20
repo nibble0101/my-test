@@ -1,4 +1,5 @@
 import { colorNames } from "./color-names.js";
+import { nearestColor } from "./nearest-color.js";
 
 export function getColor(scaledRgb) {
   const rgb = [],
@@ -17,7 +18,7 @@ export function getColor(scaledRgb) {
 
   const hsl = rgbToHsl(scaledRgb);
   const _hex = `#${hex.join("").toUpperCase()}`;
-  const name = colorNames.find(({ hex }) => hex === _hex);
+  const name = nearestColor(rgb, colorNames);
 
   return {
     name: name?.name ?? "Unknown",
