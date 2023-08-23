@@ -15,9 +15,11 @@
   border-radius: 50%;
 }
 
-.picked-color-list-view,
-.saved-colors-column-view {
+.picked-color-list-view {
   padding: 20px;
+  border-radius: 10px;
+}
+.saved-colors-column-view {
   border-radius: 10px;
 }
 

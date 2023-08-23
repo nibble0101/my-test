@@ -144,6 +144,7 @@
                                                               <object class="GtkColumnView" id="column_view">
                                                                 <style>
                                                                   <class name="saved-colors-column-view" />
+                                                                  <class name="frame" />
                                                                 </style>
                                                                 <property name="single_click_activate">true</property>
                                                                 <property name="show_row_separators">true</property>
