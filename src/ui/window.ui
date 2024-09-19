@@ -109,7 +109,7 @@
                                                     <property name="spacing">20</property>
                                                     <child>
                                                       <object class="GtkImage">
-                                                        <property name="resource">/org/mawa/mytest/image/eye-dropper.svg</property>
+                                                        <property name="resource">/org/mawa/mytest/images/eye-dropper.svg</property>
                                                         <property name="pixel_size">50</property>
                                                       </object>
                                                     </child>
@@ -162,7 +162,7 @@
                                                                     <property name="title">Color</property>
                                                                     <property name="factory">
                                                                       <object class="GtkBuilderListItemFactory">
-                                                                        <property name="resource">/org/mawa/mytest/gtk/name-column.ui</property>
+                                                                        <property name="resource">/org/mawa/mytest/name-column.ui</property>
                                                                       </object>
                                                                     </property>
                                                                   </object>
@@ -172,7 +172,7 @@
                                                                     <property name="title">Actions</property>
                                                                     <property name="factory">
                                                                       <object class="GtkBuilderListItemFactory">
-                                                                        <property name="resource">/org/mawa/mytest/gtk/actions-column.ui</property>
+                                                                        <property name="resource">/org/mawa/mytest/actions-column.ui</property>
                                                                       </object>
                                                                     </property>
                                                                   </object>
@@ -277,7 +277,7 @@
                                 </property>
                                 <property name="factory">
                                   <object class="GtkBuilderListItemFactory">
-                                    <property name="resource">/org/mawa/mytest/gtk/color-list-view.ui</property>
+                                    <property name="resource">/org/mawa/mytest/color-list-view.ui</property>
                                   </object>
                                 </property>
                               </object>
