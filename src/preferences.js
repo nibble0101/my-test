@@ -5,7 +5,7 @@ import Gio from "gi://Gio";
 export const MyPreferencesWindow = GObject.registerClass(
   {
     GTypeName: "MyPreferencesWindow",
-    Template: "resource:///org/mawa/mytest/gtk/preferences.ui",
+    Template: "resource:///org/mawa/mytest/preferences.ui",
     InternalChildren: ["system", "dark", "light"],
     Properties: {
       theme: GObject.ParamSpec.string(
