@@ -142,6 +142,30 @@
                                                         <property name="margin-bottom">18</property>
                                                         <property name="spacing">24</property>
                                                         <child>
+                                                          <object class="GtkListBox">
+                                                            <style>
+                                                              <class name="boxed-list" />
+                                                            </style>
+                                                            <property name="valign">start</property>
+                                                            <property name="selection-mode">none</property>
+                                                            <property name="margin-top">10</property>
+                                                            <child>
+                                                              <object class="AdwComboRow">
+                                                                <property name="title" translatable="yes">Color Format</property>
+                                                                <property name="model">
+                                                                  <object class="GtkStringList">
+                                                                    <items>
+                                                                      <item translatable="yes">HEX</item>
+                                                                      <item translatable="yes">RGB</item>
+                                                                      <item translatable="yes">HSL</item>
+                                                                    </items>
+                                                                  </object>
+                                                                </property>
+                                                              </object>
+                                                            </child>
+                                                          </object>
+                                                        </child>
+                                                        <child>
                                                           <object class="GtkScrolledWindow">
                                                             <property name="propagate_natural_height">true</property>
                                                             <property name="propagate_natural_width">true</property>
