@@ -21,9 +21,8 @@
 import GObject from "gi://GObject";
 import Gio from "gi://Gio";
 import Gtk from "gi://Gtk?version=4.0";
-import Adw from "gi://Adw?version=1";
+import Adw from "gi://Adw";
 import GLib from "gi://GLib";
-import system from "system";
 
 import { MyTestWindow } from "./window.js";
 
@@ -73,25 +72,12 @@ export const MyTestApplication = GObject.registerClass(
     };
 
     showAbout = () => {
-      const aboutWindow = new Adw.AboutWindow({
-        transient_for: this.active_window,
-        application_icon: pkg.name,
-        license_type: Gtk.License.GPL_3_0_ONLY,
-        version: pkg.version,
-        application_name: "Color Buddy",
-        developer_name: "Joseph Mawa",
-        developers: [`Joseph Mawa ${URL}`],
-        documenters: [`Joseph Mawa ${URL}`],
-        copyright: "Copyright © 2023 Joseph Mawa",
-        website: `${URL}/color-buddy`,
-        issue_url: `${URL}/color-buddy/issues`,
-        support_url: `${URL}/color-buddy/issues`,
-        translator_credits: _(
-          `Jane Doe <doe@gmail.com>
-          John Doe <john@gmail.com>`
-        ),
-      });
-      aboutWindow.present();
+      const builder = Gtk.Builder.new_from_resource(
+        "/org/mawa/mytest/about-dialog.ui"
+      );
+
+      const aboutWindow = builder.get_object("about_dialog");
+      aboutWindow.present(this.active_window);
     };
   }
 );

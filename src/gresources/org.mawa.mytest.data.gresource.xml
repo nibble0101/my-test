@@ -8,6 +8,7 @@
     <file preprocess="xml-stripblanks" alias="name-column.ui">ui/name-column.ui</file>
     <file preprocess="xml-stripblanks" alias="actions-column.ui">ui/actions-column.ui</file>
     <file preprocess="xml-stripblanks" alias="preferences.ui">ui/preferences.ui</file>
+    <file preprocess="xml-stripblanks" alias="about-dialog.ui">ui/about-dialog.ui</file>
     <file>images/test.svg</file>
     <file>images/eye-dropper.svg</file>
     <file>styles/index.css</file>
