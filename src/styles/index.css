@@ -16,17 +16,10 @@
 }
 
 .picked-color-list-view {
-  padding: 20px;
-  border-radius: 10px;
+  padding: 10px;
 }
 .saved-colors-column-view {
   border-radius: 10px;
-}
-
-.picked-color-list-row {
-  padding-top: 5px;
-  padding-bottom: 5px;
-  border-radius: 3px;
 }
 
 .color-label {

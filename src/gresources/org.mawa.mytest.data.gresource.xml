@@ -5,12 +5,27 @@
     <file preprocess="xml-stripblanks" alias="gtk/help-overlay.ui">ui/help-overlay.ui</file>
     <file preprocess="xml-stripblanks" alias="color-list-view.ui">ui/color-list-view.ui</file>
     <file preprocess="xml-stripblanks" alias="column-view.ui">ui/column-view.ui</file>
-    <file preprocess="xml-stripblanks" alias="name-column.ui">ui/name-column.ui</file>
-    <file preprocess="xml-stripblanks" alias="actions-column.ui">ui/actions-column.ui</file>
     <file preprocess="xml-stripblanks" alias="preferences.ui">ui/preferences.ui</file>
     <file preprocess="xml-stripblanks" alias="about-dialog.ui">ui/about-dialog.ui</file>
+  </gresource>
+  <!-- Resources for color format table columns -->
+  <gresource prefix="/org/mawa/mytest">
+    <file preprocess="xml-stripblanks" alias="saved-color-table-columns/color.ui">ui/saved-color-table-columns/color.ui</file>
+    <file preprocess="xml-stripblanks" alias="saved-color-table-columns/actions.ui">ui/saved-color-table-columns/actions.ui</file>
+  </gresource>
+  <!-- Resources for color format table columns -->
+  <gresource prefix="/org/mawa/mytest">
+    <file preprocess="xml-stripblanks" alias="color-format-table-columns/format.ui">ui/color-format-table-columns/format.ui</file>
+    <file preprocess="xml-stripblanks" alias="color-format-table-columns/color.ui">ui/color-format-table-columns/color.ui</file>
+    <file preprocess="xml-stripblanks" alias="color-format-table-columns/actions.ui">ui/color-format-table-columns/actions.ui</file>
+  </gresource>
+  <!-- Resources for images -->
+  <gresource prefix="/org/mawa/mytest">
     <file>images/test.svg</file>
     <file>images/eye-dropper.svg</file>
+  </gresource>
+  <!-- Resources for css styles -->
+  <gresource prefix="/org/mawa/mytest">
     <file>styles/index.css</file>
   </gresource>
 </gresources>

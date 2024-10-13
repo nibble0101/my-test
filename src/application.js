@@ -37,8 +37,6 @@ export const savedColorsFile = Gio.File.new_for_path(
   ])
 );
 
-const URL = "https://www.github.com/nibble0101/";
-
 export const MyTestApplication = GObject.registerClass(
   class MyTestApplication extends Adw.Application {
     constructor() {
@@ -76,8 +74,8 @@ export const MyTestApplication = GObject.registerClass(
         "/org/mawa/mytest/about-dialog.ui"
       );
 
-      const aboutWindow = builder.get_object("about_dialog");
-      aboutWindow.present(this.active_window);
+      const aboutDialog = builder.get_object("about_dialog");
+      aboutDialog.present(this.active_window);
     };
   }
 );

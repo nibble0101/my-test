@@ -101,6 +101,8 @@ export const MyTestWindow = GObject.registerClass(
         "changed::preferred-theme",
         this.setPreferredColorScheme
       );
+
+      // Create actions
       this.createActions();
 
       // Initialize when the app starts
