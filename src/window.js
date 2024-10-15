@@ -168,6 +168,10 @@ export const MyTestWindow = GObject.registerClass(
         name: "preferences",
       });
 
+      const deleteSavedColorsAction = new Gio.SimpleAction({
+        name: "delete-saved-colors",
+      });
+
       const copySavedColorAction = new Gio.SimpleAction({
         name: "copy-saved-color",
         parameterType: GLib.VariantType.new("s"),
@@ -199,6 +203,10 @@ export const MyTestWindow = GObject.registerClass(
 
         preferencesWindow.set_transient_for(this);
         preferencesWindow.present();
+      });
+
+      deleteSavedColorsAction.connect("activate", () => {
+        console.log("delete-saved-color action activated");
       });
 
       copySavedColorAction.connect("activate", (_, savedColor) => {
@@ -251,8 +259,9 @@ export const MyTestWindow = GObject.registerClass(
       this.add_action(copySavedColorAction);
       this.add_action(deleteSavedColorAction);
       this.add_action(viewSavedColorAction);
-
+      
       // Application-scoped actions
+      this.application.add_action(deleteSavedColorsAction);
       this.application.add_action(showPreferencesWindowAction);
     };
 

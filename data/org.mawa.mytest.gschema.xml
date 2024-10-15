@@ -18,5 +18,15 @@
       </choices>
       <default>"system"</default>
     </key>
+    <key name="color-format" type="s">
+      <choices>
+        <choice value="HEX" />
+        <choice value="RGB" />
+        <choice value="RGB PERCENT" />
+        <choice value="HSL" />
+        <choice value="HSV" />
+      </choices>
+      <default>"RGB"</default>
+    </key>
   </schema>
 </schemalist>

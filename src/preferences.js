@@ -6,12 +6,19 @@ export const MyPreferencesWindow = GObject.registerClass(
   {
     GTypeName: "MyPreferencesWindow",
     Template: "resource:///org/mawa/mytest/preferences.ui",
-    InternalChildren: ["system", "dark", "light"],
+    InternalChildren: ["system", "dark", "light", "colorFormatSettings"],
     Properties: {
       theme: GObject.ParamSpec.string(
         "theme",
         "Theme",
         "Preferred theme",
+        GObject.ParamFlags.READWRITE,
+        ""
+      ),
+      colorFormat: GObject.ParamSpec.string(
+        "colorFormat",
+        "color_format",
+        "Color format",
         GObject.ParamFlags.READWRITE,
         ""
       ),
@@ -26,6 +33,13 @@ export const MyPreferencesWindow = GObject.registerClass(
         "preferred-theme",
         this,
         "theme",
+        Gio.SettingsBindFlags.DEFAULT
+      );
+
+      this.settings.bind(
+        "color-format",
+        this,
+        "colorFormat",
         Gio.SettingsBindFlags.DEFAULT
       );
 
@@ -54,6 +68,35 @@ export const MyPreferencesWindow = GObject.registerClass(
         GObject.BindingFlags.BIDIRECTIONAL | GObject.BindingFlags.SYNC_CREATE,
         (_, theme) => [true, theme === "dark"],
         (_, theme) => [theme, "dark"]
+      );
+
+      this.bind_property_full(
+        "colorFormat",
+        this._colorFormatSettings,
+        "selected",
+        GObject.BindingFlags.BIDIRECTIONAL | GObject.BindingFlags.SYNC_CREATE,
+        (_, colorFormat) => {
+          const model = this._colorFormatSettings.model;
+
+          for (let i = 0; i < model.get_n_items(); i++) {
+            const stringObject = model.get_item(i);
+
+            if (stringObject?.string === colorFormat) {
+              return [true, i];
+            }
+          }
+          return [false, 0];
+        },
+        (_, selected) => {
+          const stringObject =
+            this._colorFormatSettings.model.get_item(selected);
+
+          if (stringObject?.string) {
+            return [true, stringObject.string];
+          }
+
+          return [false, "RGB"];
+        }
       );
     }
   }
