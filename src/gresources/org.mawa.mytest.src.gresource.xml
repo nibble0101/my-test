@@ -5,6 +5,7 @@
     <file>application.js</file>
     <file>window.js</file>
     <file>preferences.js</file>
+    <file>alert-dialog.js</file>
     <file>utils/utils.js</file>
     <file>utils/color.js</file>
     <file>utils/saved-color.js</file>

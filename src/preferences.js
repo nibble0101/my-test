@@ -1,6 +1,7 @@
 import Adw from "gi://Adw";
 import GObject from "gi://GObject";
 import Gio from "gi://Gio";
+import { AlertDialog } from "./alert-dialog.js";
 
 export const MyPreferencesWindow = GObject.registerClass(
   {
@@ -98,6 +99,11 @@ export const MyPreferencesWindow = GObject.registerClass(
           return [false, "RGB"];
         }
       );
+    }
+
+    deleteSavedColors() {
+      const alertDialog = new AlertDialog();
+      alertDialog.present(this);
     }
   }
 );

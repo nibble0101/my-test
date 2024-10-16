@@ -7,6 +7,7 @@
     <file preprocess="xml-stripblanks" alias="column-view.ui">ui/column-view.ui</file>
     <file preprocess="xml-stripblanks" alias="preferences.ui">ui/preferences.ui</file>
     <file preprocess="xml-stripblanks" alias="about-dialog.ui">ui/about-dialog.ui</file>
+    <file preprocess="xml-stripblanks" alias="alert-dialog.ui">ui/alert-dialog.ui</file>
   </gresource>
   <!-- Resources for color format table columns -->
   <gresource prefix="/org/mawa/mytest">

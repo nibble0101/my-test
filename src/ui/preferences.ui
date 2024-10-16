@@ -94,7 +94,11 @@
                     <property name="icon-name">user-trash-symbolic</property>
                     <property name="valign">center</property>
                     <property name="halign">center</property>
-                    <property name="action-name">app.delete-saved-colors</property>
+                    <signal
+                      name="clicked"
+                      handler="deleteSavedColors"
+                      swapped="no"
+                      object="MyPreferencesWindow" />
                   </object>
                 </child>
               </object>
@@ -114,7 +118,6 @@
                     </items>
                   </object>
                 </property>
-                <property name="selected">5</property>
               </object>
             </child>
           </object>

@@ -170,6 +170,7 @@ export const MyTestWindow = GObject.registerClass(
 
       const deleteSavedColorsAction = new Gio.SimpleAction({
         name: "delete-saved-colors",
+        parameterType: GLib.VariantType.new("s"),
       });
 
       const copySavedColorAction = new Gio.SimpleAction({
@@ -205,8 +206,12 @@ export const MyTestWindow = GObject.registerClass(
         preferencesWindow.present();
       });
 
-      deleteSavedColorsAction.connect("activate", () => {
-        console.log("delete-saved-color action activated");
+      deleteSavedColorsAction.connect("activate", (_, alertDialogResponse) => {
+        const response = alertDialogResponse?.unpack();
+        
+        if (response === "delete") {
+          this.displayToast("Deleted all saved colors");
+        }
       });
 
       copySavedColorAction.connect("activate", (_, savedColor) => {
@@ -259,10 +264,14 @@ export const MyTestWindow = GObject.registerClass(
       this.add_action(copySavedColorAction);
       this.add_action(deleteSavedColorAction);
       this.add_action(viewSavedColorAction);
-      
+
       // Application-scoped actions
       this.application.add_action(deleteSavedColorsAction);
       this.application.add_action(showPreferencesWindowAction);
+
+      // Add it to gloabThis so that it is triggered from a modal
+      globalThis.deleteSavedColorsAction = deleteSavedColorsAction;
+
     };
 
     clickHandler = () => {
