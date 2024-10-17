@@ -208,8 +208,10 @@ export const MyTestWindow = GObject.registerClass(
 
       deleteSavedColorsAction.connect("activate", (_, alertDialogResponse) => {
         const response = alertDialogResponse?.unpack();
-        
+
         if (response === "delete") {
+          this._saved_colors_selection_model.model.remove_all();
+          this.saveData([]);
           this.displayToast("Deleted all saved colors");
         }
       });
@@ -271,7 +273,6 @@ export const MyTestWindow = GObject.registerClass(
 
       // Add it to gloabThis so that it is triggered from a modal
       globalThis.deleteSavedColorsAction = deleteSavedColorsAction;
-
     };
 
     clickHandler = () => {
