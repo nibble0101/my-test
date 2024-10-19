@@ -78,7 +78,7 @@ export const colorFormats = [
   { key: "name", description: "NAME" },
   { key: "hex", description: "HEX" },
   { key: "rgb", description: "RGB" },
-  { key: "rgb_percent", description: "RGB PERCENT" },
+  { key: "rgb_percent", description: "RGB %" },
   { key: "hsl", description: "HSL" },
   { key: "hsv", description: "HSV" },
 ];

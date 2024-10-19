@@ -112,7 +112,7 @@
                     <items>
                       <item translatable="yes">HEX</item>
                       <item translatable="yes">RGB</item>
-                      <item translatable="yes">RGB PERCENT</item>
+                      <item translatable="yes">RGB %</item>
                       <item translatable="yes">HSL</item>
                       <item translatable="yes">HSV</item>
                     </items>

@@ -1,62 +1,60 @@
 {
-    "app-id" : "org.mawa.mytest",
-    "runtime" : "org.gnome.Platform",
-    "runtime-version" : "47",
-    "sdk" : "org.gnome.Sdk",
-    "command" : "org.mawa.mytest",
-    "finish-args" : [
-        "--share=network",
-        "--share=ipc",
-        "--socket=fallback-x11",
-        "--device=dri",
-        "--socket=wayland"
-    ],
-    "cleanup" : [
-        "/include",
-        "/lib/pkgconfig",
-        "/man",
-        "/share/doc",
-        "/share/gtk-doc",
-        "/share/man",
-        "/share/pkgconfig",
-        "*.la",
-        "*.a"
-    ],
-    "modules" : [
+  "app-id": "org.mawa.mytest",
+  "runtime": "org.gnome.Platform",
+  "runtime-version": "47",
+  "sdk": "org.gnome.Sdk",
+  "command": "org.mawa.mytest",
+  "finish-args": [
+    "--share=network",
+    "--share=ipc",
+    "--socket=fallback-x11",
+    "--device=dri",
+    "--socket=wayland"
+  ],
+  "cleanup": [
+    "/include",
+    "/lib/pkgconfig",
+    "/man",
+    "/share/doc",
+    "/share/gtk-doc",
+    "/share/man",
+    "/share/pkgconfig",
+    "*.la",
+    "*.a"
+  ],
+  "modules": [
+    {
+      "name": "libportal",
+      "builddir": true,
+      "buildsystem": "meson",
+      "config-opts": [
+        "-Ddocs=false",
+        "-Dvapi=false",
+        "-Dbackends=gtk4",
+        "-Dintrospection=true"
+      ],
+      "sources": [
         {
-            "name" : "libportal",
-            "builddir" : true,
-            "buildsystem" : "meson",
-            "config-opts" : [
-                "-Ddocs=false",
-                "-Dvapi=false",
-                "-Dbackends=gtk4",
-                "-Dintrospection=true"
-            ],
-            "sources" : [
-                {
-                    "type" : "archive",
-                    "url" : "https://github.com/flatpak/libportal/releases/download/0.6/libportal-0.6.tar.xz",
-                    "sha256" : "88a12c3ba71bc31acff7238c280de697d609cebc50830c3766776ec35abc6566"
-                }
-            ]
-        },
-        {
-            "name" : "my-test",
-            "builddir" : true,
-            "buildsystem" : "meson",
-            "sources" : [
-                {
-                    "type" : "git",
-                    "url" : "file:///home/mawa/Documents/Projects"
-                }
-            ],
-            "config-opts" : [
-                "--libdir=lib"
-            ]
+          "type": "archive",
+          "url": "https://github.com/flatpak/libportal/releases/download/0.6/libportal-0.6.tar.xz",
+          "sha256": "88a12c3ba71bc31acff7238c280de697d609cebc50830c3766776ec35abc6566"
         }
-    ],
-    "build-options" : {
-        "env" : {        }
+      ]
+    },
+    {
+      "name": "my-test",
+      "builddir": true,
+      "buildsystem": "meson",
+      "sources": [
+        {
+          "type": "git",
+          "url": "file:///home/mawa/Documents/Projects"
+        }
+      ],
+      "config-opts": ["--libdir=lib"]
     }
+  ],
+  "build-options": {
+    "env": {}
+  }
 }
