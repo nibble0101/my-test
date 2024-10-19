@@ -2,6 +2,7 @@ import Adw from "gi://Adw";
 import GObject from "gi://GObject";
 import Gio from "gi://Gio";
 import { AlertDialog } from "./alert-dialog.js";
+import { colorFormats } from "./utils/utils.js";
 
 export const MyPreferencesWindow = GObject.registerClass(
   {
@@ -77,12 +78,22 @@ export const MyPreferencesWindow = GObject.registerClass(
         "selected",
         GObject.BindingFlags.BIDIRECTIONAL | GObject.BindingFlags.SYNC_CREATE,
         (_, colorFormat) => {
+          const colorFormatObject = colorFormats.find(
+            ({ key }) => key === colorFormat
+          );
+
+          if (!colorFormatObject) {
+            throw new Error(
+              "Mismatch between color keys in the settings and in colorFormats array"
+            );
+          }
+
           const model = this._colorFormatSettings.model;
 
           for (let i = 0; i < model.get_n_items(); i++) {
             const stringObject = model.get_item(i);
 
-            if (stringObject?.string === colorFormat) {
+            if (stringObject?.string === colorFormatObject.description) {
               return [true, i];
             }
           }
@@ -93,10 +104,20 @@ export const MyPreferencesWindow = GObject.registerClass(
             this._colorFormatSettings.model.get_item(selected);
 
           if (stringObject?.string) {
-            return [true, stringObject.string];
+            const colorFormatObject = colorFormats.find(
+              ({ description }) => description === stringObject?.string
+            );
+
+            if (!colorFormatObject) {
+              throw new Error(
+                "There is a mismatch between color descriptions in the color format settings model and colorFormats array"
+              );
+            }
+
+            return [true, colorFormatObject.key];
           }
 
-          return [false, "RGB"];
+          return [false, "rgb"];
         }
       );
     }

@@ -26,14 +26,17 @@ import Gio from "gi://Gio";
 import Xdp from "gi://Xdp";
 import GLib from "gi://GLib";
 
-import { getColor, getHsv } from "./utils/utils.js";
+import {
+  getColor,
+  getHsv,
+  colorFormats,
+} from "./utils/utils.js";
 import { Color } from "./utils/color.js";
 import { SavedColor } from "./utils/saved-color.js";
 import { MyPreferencesWindow } from "./preferences.js";
 import { savedColorsFile } from "./application.js";
 
 const xdpPortal = Xdp.Portal.new();
-const colorFormats = ["name", "hex", "rgb", "rgb_percent", "hsl", "hsv"];
 
 export const MyTestWindow = GObject.registerClass(
   {
@@ -57,6 +60,14 @@ export const MyTestWindow = GObject.registerClass(
         GObject.ParamFlags.READWRITE,
         ""
       ),
+      color_format: GObject.ParamSpec.string(
+        "color_format",
+        "colorFormat",
+        "Selected color format",
+        GObject.ParamFlags.READWRITE,
+        ""
+      ),
+
       settings: GObject.ParamSpec.object(
         "settings",
         "Settings",
@@ -97,10 +108,21 @@ export const MyTestWindow = GObject.registerClass(
         Gio.SettingsBindFlags.DEFAULT
       );
 
+      this.settings.bind(
+        "color-format",
+        this,
+        "color_format",
+        Gio.SettingsBindFlags.GET
+      );
+
+      // Color theme settings
       this.settings.connect(
         "changed::preferred-theme",
         this.setPreferredColorScheme
       );
+
+      // Color format settings
+      this.settings.connect("changed::color-format", this.updateColorFormat);
 
       // Create actions
       this.createActions();
@@ -137,8 +159,8 @@ export const MyTestWindow = GObject.registerClass(
         const item = model.get_item(idx);
         const pickedColor = { id: item.id.unpack() };
 
-        for (const format of colorFormats) {
-          pickedColor[format] = item[format];
+        for (const { key } of colorFormats) {
+          pickedColor[key] = item[key];
         }
 
         pickedColors.push(pickedColor);
@@ -364,6 +386,21 @@ export const MyTestWindow = GObject.registerClass(
       this.application.get_style_manager().color_scheme = colorScheme;
     };
 
+    updateColorFormat = () => {
+      const model = this._saved_colors_selection_model.model;
+
+      for (let i = 0; i < model.get_n_items(); i++) {
+        const item = model.get_item(i);
+        const itemClone = { id: item.id.unpack() };
+
+        for (const { key } of colorFormats) {
+          itemClone[key] = item[key];
+        }
+
+        model.splice(i, 1, [new SavedColor(itemClone, this.color_format)]);
+      }
+    };
+
     getSavedColors = () => {
       const filePath = savedColorsFile.get_path();
       const fileExists = GLib.file_test(filePath, GLib.FileTest.EXISTS);
@@ -378,7 +415,7 @@ export const MyTestWindow = GObject.registerClass(
           const { model } = this._saved_colors_selection_model;
 
           for (const pickedColor of pickedColors) {
-            model.append(new SavedColor(pickedColor));
+            model.append(new SavedColor(pickedColor, this.color_format));
           }
         } else {
           console.log("Failed to read saved data");
@@ -446,15 +483,15 @@ export const MyTestWindow = GObject.registerClass(
 
     updateSavedColors = (pickedColor = {}) => {
       const { model } = this._saved_colors_selection_model;
-      model.append(new SavedColor(pickedColor));
+      model.append(new SavedColor(pickedColor, this.color_format));
     };
 
     updatePickedColor = (pickedColor = {}) => {
       const { model } = this._selection_model;
       model.remove_all();
 
-      for (const format of colorFormats) {
-        model.append(new Color(format, pickedColor[format]));
+      for (const { key, description } of colorFormats) {
+        model.append(new Color(description, pickedColor[key]));
       }
     };
   }

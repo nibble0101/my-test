@@ -25,7 +25,7 @@
                 <property name="action-target">""</property>
                 <property name="action-name">win.copy-saved-color</property>
                 <binding name="action-target">
-                  <lookup name="visible" type="SavedColor">
+                  <lookup name="preferredColorFormatCopy" type="SavedColor">
                     <lookup name="item">GtkListItem</lookup>
                   </lookup>
                 </binding>

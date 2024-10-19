@@ -16,7 +16,7 @@
             <property name="buffer">
               <object class="GtkEntryBuffer">
                 <binding name="text">
-                  <lookup name="hex" type="SavedColor">
+                  <lookup name="preferredColorFormat" type="SavedColor">
                     <lookup name="item">GtkListItem</lookup>
                   </lookup>
                 </binding>

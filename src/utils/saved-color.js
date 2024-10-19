@@ -17,7 +17,7 @@ export const SavedColor = GObject.registerClass(
       id: GObject.param_spec_variant(
         "id",
         "ID",
-        "Picked color ID gVariantType datatyp",
+        "Picked color ID gVariantType datatype",
         GLib.VariantType.new("s"),
         null,
         GObject.ParamFlags.READWRITE
@@ -64,10 +64,17 @@ export const SavedColor = GObject.registerClass(
         GObject.ParamFlags.READWRITE,
         ""
       ),
-      visible: GObject.param_spec_variant(
-        "visible",
-        "Visible",
-        "Visible color format in the picked color's page",
+      preferredColorFormat: GObject.ParamSpec.string(
+        "preferredColorFormat",
+        "preferred_color_format",
+        "The preferred color format to be displayed in the Entry box",
+        GObject.ParamFlags.READWRITE,
+        ""
+      ),
+      preferredColorFormatCopy: GObject.param_spec_variant(
+        "preferredColorFormatCopy",
+        "preferred_color_format_copy",
+        "Preferred color format to be passed to the copy button action",
         GLib.VariantType.new("s"),
         null,
         GObject.ParamFlags.READWRITE
@@ -75,7 +82,8 @@ export const SavedColor = GObject.registerClass(
     },
   },
   class SavedColor extends GObject.Object {
-    constructor({ id, name, hex, rgb, rgb_percent, hsl, hsv }) {
+    constructor(pickedColor = {}, preferredColorFormat) {
+      const { id, name, hex, rgb, rgb_percent, hsl, hsv } = pickedColor;
       super();
       this.id = GLib.Variant.new_string(id);
       this.name = name;
@@ -84,8 +92,10 @@ export const SavedColor = GObject.registerClass(
       this.rgb_percent = rgb_percent;
       this.hsl = hsl;
       this.hsv = hsv;
-      this.visible = GLib.Variant.new_string(hex);
-
+      this.preferredColorFormat = pickedColor[preferredColorFormat];
+      this.preferredColorFormatCopy = GLib.Variant.new_string(
+        pickedColor[preferredColorFormat]
+      );
     }
   }
 );
