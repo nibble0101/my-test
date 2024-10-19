@@ -109,13 +109,13 @@
                                                     <property name="spacing">20</property>
                                                     <child>
                                                       <object class="GtkImage">
-                                                        <property name="resource">/org/mawa/mytest/images/eye-dropper.svg</property>
-                                                        <property name="pixel_size">50</property>
+                                                        <property name="icon-name">color-select-symbolic</property>
+                                                        <property name="icon-size">large</property>
                                                       </object>
                                                     </child>
                                                     <child>
                                                       <object class="GtkLabel">
-                                                        <property name="label">You don't have any saved colors yet.</property>
+                                                        <property name="label">You don't have any saved colors.</property>
                                                       </object>
                                                     </child>
                                                   </object>
