@@ -26,11 +26,7 @@ import Gio from "gi://Gio";
 import Xdp from "gi://Xdp";
 import GLib from "gi://GLib";
 
-import {
-  getColor,
-  getHsv,
-  colorFormats,
-} from "./utils/utils.js";
+import { getColor, getHsv, colorFormats } from "./utils/utils.js";
 import { Color } from "./utils/color.js";
 import { SavedColor } from "./utils/saved-color.js";
 import { MyPreferencesWindow } from "./preferences.js";
@@ -47,7 +43,7 @@ export const MyTestWindow = GObject.registerClass(
       "main_stack",
       "back_to_home_page_button",
       "selection_model",
-      "picked_color_display",
+      "colorDialogBtn",
       "toast_overlay",
       "saved_colors_selection_model",
       "picked_colors_stack",
@@ -268,19 +264,12 @@ export const MyTestWindow = GObject.registerClass(
         }
 
         this.updatePickedColor(item);
-
-        const css = `.picked-color-display{ background-color: ${item.rgb}; }`;
-
-        const cssProvider = new Gtk.CssProvider();
-        cssProvider.load_from_data(css, -1);
-
         this._main_stack.visible_child_name = "picked_color_page";
 
-        const styleContext = this._picked_color_display.get_style_context();
-        styleContext.add_provider(
-          cssProvider,
-          Gtk.STYLE_PROVIDER_PRIORITY_USER
-        );
+        const color = new Gdk.RGBA();
+        color.parse(item.rgb);
+
+        this._colorDialogBtn.set_rgba(color);
       });
 
       // Window-scoped actions
@@ -337,18 +326,11 @@ export const MyTestWindow = GObject.registerClass(
           this.updatePickedColor(pickedColor);
           this.updateSavedColors(pickedColor);
 
-          const css = `.picked-color-display{ background-color: ${rgb}; }`;
-
-          const cssProvider = new Gtk.CssProvider();
-          cssProvider.load_from_data(css, -1);
-
           this._main_stack.visible_child_name = "picked_color_page";
+          const color = new Gdk.RGBA();
+          color.parse(pickedColor.rgb);
 
-          const styleContext = this._picked_color_display.get_style_context();
-          styleContext.add_provider(
-            cssProvider,
-            Gtk.STYLE_PROVIDER_PRIORITY_USER
-          );
+          this._colorDialogBtn.set_rgba(color);
         } catch (err) {
           if (err instanceof GLib.Error) {
             if (err.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.FAILED)) {
@@ -361,6 +343,10 @@ export const MyTestWindow = GObject.registerClass(
         }
       });
     };
+
+    selectColorHandler(){
+      console.log('Color selected');
+    }
 
     backToHomePageHandler = () => {
       this._main_stack.visible_child_name = "main_page";

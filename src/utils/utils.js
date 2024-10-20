@@ -75,10 +75,10 @@ export function round(number, decimalPlaces = 0) {
 
 
 export const colorFormats = [
-  { key: "name", description: "NAME" },
-  { key: "hex", description: "HEX" },
+  { key: "name", description: "Name" },
+  { key: "hex", description: "Hex" },
   { key: "rgb", description: "RGB" },
-  { key: "rgb_percent", description: "RGB %" },
+  { key: "rgb_percent", description: "RGB percent" },
   { key: "hsl", description: "HSL" },
   { key: "hsv", description: "HSV" },
 ];

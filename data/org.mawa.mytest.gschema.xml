@@ -20,6 +20,7 @@
     </key>
     <key name="color-format" type="s">
       <choices>
+        <choice value="name" />
         <choice value="hex" />
         <choice value="rgb" />
         <choice value="rgb_percent" />

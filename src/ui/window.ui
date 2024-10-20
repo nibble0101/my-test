@@ -241,22 +241,24 @@
                         </style>
                         <child>
                           <object class="GtkBox">
-                            <style>
-                              <class name="picked-color-wrapper" />
-                            </style>
                             <property name="orientation">vertical</property>
                             <property name="halign">3</property>
                             <property name="valign">3</property>
                             <property name="vexpand">true</property>
                             <child>
-                              <object class="GtkBox" id="picked_color_display">
-                                <property name="orientation">horizontal</property>
-                                <property name="halign">3</property>
-                                <property name="valign">3</property>
-                                <property name="vexpand">true</property>
-                                <style>
-                                  <class name="picked-color-display" />
-                                </style>
+                              <object class="GtkColorDialogButton" id="colorDialogBtn">
+                                <signal
+                                  name="notify::rgba"
+                                  handler="selectColorHandler"
+                                  swapped="no"
+                                  object="MyTestWindow" />
+                                <property name="dialog">
+                                  <object class="GtkColorDialog">
+                                    <property name="modal">true</property>
+                                    <property name="title">Modify color or select new one</property>
+                                    <property name="with-alpha">false</property>
+                                  </object>
+                                </property>
                               </object>
                             </child>
                           </object>

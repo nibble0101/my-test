@@ -2,33 +2,10 @@
   margin: 10px;
 }
 
-.picked-color-wrapper {
-  min-width: 120px;
-  min-height: 120px;
-  border-radius: 10px;
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAAA3NCSVQICAjb4U/gAAAABlBMVEXMzMz////TjRV2AAAACXBIWXMAAArrAAAK6wGCiw1aAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M26LyyjAAAABFJREFUCJlj+M/AgBVhF/0PAH6/D/HkDxOGAAAAAElFTkSuQmCC");
-}
-
-.picked-color-display {
-  min-width: 80px;
-  min-height: 80px;
-  border-radius: 50%;
-}
-
-
 .saved-colors-column-view {
   border-radius: 10px;
-
-}
-
-.color-label {
-  padding: 5px;
 }
 
 .pick-color-button {
   padding: 10px;
-}
-
-.preferred-color-scheme-row {
-  padding: 20px;
 }
