@@ -29,7 +29,7 @@ import GLib from "gi://GLib";
 import { getColor, getHsv, colorFormats } from "./utils/utils.js";
 import { Color } from "./utils/color.js";
 import { SavedColor } from "./utils/saved-color.js";
-import { MyPreferencesWindow } from "./preferences.js";
+import { MyPreferencesDialog } from "./preferences.js";
 import { savedColorsFile } from "./application.js";
 import { ConfirmDeleteOne } from "./confirm-delete-one.js";
 
@@ -223,12 +223,10 @@ export const MyTestWindow = GObject.registerClass(
       });
 
       showPreferencesWindowAction.connect("activate", () => {
-        const preferencesWindow = new MyPreferencesWindow({
-          application: this.application,
-        });
+        const preferencesWindow = new MyPreferencesDialog();
 
-        preferencesWindow.set_transient_for(this);
-        preferencesWindow.present();
+        // preferencesWindow.set_transient_for(this);
+        preferencesWindow.present(this);
       });
 
       deleteSavedColorsAction.connect("activate", (_, alertDialogResponse) => {

@@ -4,9 +4,9 @@ import Gio from "gi://Gio";
 import { ConfirmDeleteAll } from "./confirm-delete-all.js";
 import { colorFormats } from "./utils/utils.js";
 
-export const MyPreferencesWindow = GObject.registerClass(
+export const MyPreferencesDialog = GObject.registerClass(
   {
-    GTypeName: "MyPreferencesWindow",
+    GTypeName: "MyPreferencesDialog",
     Template: "resource:///org/mawa/mytest/preferences.ui",
     InternalChildren: ["system", "dark", "light", "colorFormatSettings"],
     Properties: {
@@ -26,7 +26,7 @@ export const MyPreferencesWindow = GObject.registerClass(
       ),
     },
   },
-  class MyPreferencesWindow extends Adw.PreferencesWindow {
+  class MyPreferencesDialog extends Adw.PreferencesDialog {
     constructor(options = {}) {
       super(options);
 
