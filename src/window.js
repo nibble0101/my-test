@@ -225,7 +225,6 @@ export const MyTestWindow = GObject.registerClass(
       showPreferencesWindowAction.connect("activate", () => {
         const preferencesWindow = new MyPreferencesDialog();
 
-        // preferencesWindow.set_transient_for(this);
         preferencesWindow.present(this);
       });
 
