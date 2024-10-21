@@ -1,7 +1,7 @@
 import Adw from "gi://Adw";
 import GObject from "gi://GObject";
 import Gio from "gi://Gio";
-import { AlertDialog } from "./alert-dialog.js";
+import { ConfirmDeleteAll } from "./confirm-delete-all.js";
 import { colorFormats } from "./utils/utils.js";
 
 export const MyPreferencesWindow = GObject.registerClass(
@@ -123,8 +123,8 @@ export const MyPreferencesWindow = GObject.registerClass(
     }
 
     deleteSavedColors() {
-      const alertDialog = new AlertDialog();
-      alertDialog.present(this);
+      const confirmDeleteAll = new ConfirmDeleteAll();
+      confirmDeleteAll.present(this);
     }
   }
 );

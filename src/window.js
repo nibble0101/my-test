@@ -31,6 +31,7 @@ import { Color } from "./utils/color.js";
 import { SavedColor } from "./utils/saved-color.js";
 import { MyPreferencesWindow } from "./preferences.js";
 import { savedColorsFile } from "./application.js";
+import { ConfirmDeleteOne } from "./confirm-delete-one.js";
 
 const xdpPortal = Xdp.Portal.new();
 
@@ -63,7 +64,13 @@ export const MyTestWindow = GObject.registerClass(
         GObject.ParamFlags.READWRITE,
         ""
       ),
-
+      visible_color_id: GObject.ParamSpec.string(
+        "visible_color_id",
+        "visibleColorId",
+        "Id of the color visible on the details page",
+        GObject.ParamFlags.READWRITE,
+        ""
+      ),
       settings: GObject.ParamSpec.object(
         "settings",
         "Settings",
@@ -244,15 +251,23 @@ export const MyTestWindow = GObject.registerClass(
       });
 
       deleteSavedColorAction.connect("activate", (_, colorId) => {
-        const id = colorId?.unpack();
-        const [idx, item] = this.getItem(id);
+        const confirmDeleteOne = new ConfirmDeleteOne();
 
-        if (idx === null) {
-          throw new Error(`id: ${id} is non-existent`);
-        }
+        confirmDeleteOne.connect("response", (actionDialog, response) => {
+          if (response === "cancel") return;
 
-        this._saved_colors_selection_model.model.remove(idx);
-        this.displayToast("Deleted saved color successfully");
+          const id = colorId?.unpack();
+          const [idx, item] = this.getItem(id);
+
+          if (idx === null) {
+            throw new Error(`id: ${id} is non-existent`);
+          }
+
+          this._saved_colors_selection_model.model.remove(idx);
+          this.displayToast("Deleted saved color successfully");
+        });
+
+        confirmDeleteOne.present(this);
       });
 
       viewSavedColorAction.connect("activate", (_, colorId) => {
@@ -324,7 +339,7 @@ export const MyTestWindow = GObject.registerClass(
           };
 
           this.updatePickedColor(pickedColor);
-          this.updateSavedColors(pickedColor);
+          this.addNewColor(pickedColor);
 
           this._main_stack.visible_child_name = "picked_color_page";
           const color = new Gdk.RGBA();
@@ -344,12 +359,39 @@ export const MyTestWindow = GObject.registerClass(
       });
     };
 
-    selectColorHandler(){
-      console.log('Color selected');
+    selectColorHandler(colorDialogBtn) {
+      const scaledRgb = [
+        colorDialogBtn.rgba.red,
+        colorDialogBtn.rgba.green,
+        colorDialogBtn.rgba.blue,
+      ];
+
+      const colorObject = getColor(scaledRgb);
+      colorObject.hsv = getHsv(Gtk.rgb_to_hsv(...scaledRgb));
+
+      const model = this._selection_model.model;
+      let isSameColor = true;
+
+      for (let i = 0; i < model.get_n_items(); i++) {
+        const item = model.get_item(i);
+        if (item.color === colorObject[item.key]) {
+          continue;
+        }
+
+        isSameColor = false;
+        break;
+      }
+
+      if (isSameColor) return;
+
+      colorObject.id = this.visible_color_id;
+      this.updatePickedColor(colorObject);
+      this.updateSavedColor(colorObject);
     }
 
     backToHomePageHandler = () => {
       this._main_stack.visible_child_name = "main_page";
+      this.visible_color_id = "";
     };
 
     setPreferredColorScheme = () => {
@@ -467,17 +509,32 @@ export const MyTestWindow = GObject.registerClass(
       return [null, null];
     };
 
-    updateSavedColors = (pickedColor = {}) => {
+    addNewColor = (pickedColor = {}) => {
       const { model } = this._saved_colors_selection_model;
       model.append(new SavedColor(pickedColor, this.color_format));
     };
 
+    updateSavedColor = (pickedColor = {}) => {
+      const model = this._saved_colors_selection_model.model;
+
+      for (let i = 0; i < model.get_n_items(); i++) {
+        const item = model.get_item(i);
+        if (item.id.unpack() === pickedColor.id) {
+          const newColor = new SavedColor(pickedColor, this.color_format);
+          model.splice(i, 1, [newColor]);
+        }
+      }
+    };
+
     updatePickedColor = (pickedColor = {}) => {
-      const { model } = this._selection_model;
+      const model = this._selection_model.model;
+      const { id } = pickedColor;
+      this.visible_color_id = typeof id === "string" ? id : id.unpack();
+
       model.remove_all();
 
       for (const { key, description } of colorFormats) {
-        model.append(new Color(description, pickedColor[key]));
+        model.append(new Color(description, pickedColor[key], key));
       }
     };
   }

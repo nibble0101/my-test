@@ -1,15 +1,6 @@
 import GObject from "gi://GObject";
 import GLib from "gi://GLib";
 
-/**
- * @param {string} id
- * @param {string} name
- * @param {string} hex
- * @param {string} rgb
- * @param {string} rgbPercent
- * @param {string} hsl
- * @param {string} hsv
- */
 export const SavedColor = GObject.registerClass(
   {
     GTypeName: "SavedColor",
@@ -83,8 +74,9 @@ export const SavedColor = GObject.registerClass(
   },
   class SavedColor extends GObject.Object {
     constructor(pickedColor = {}, preferredColorFormat) {
-      const { id, name, hex, rgb, rgb_percent, hsl, hsv } = pickedColor;
       super();
+
+      const { id, name, hex, rgb, rgb_percent, hsl, hsv } = pickedColor;
       this.id = GLib.Variant.new_string(id);
       this.name = name;
       this.hex = hex;

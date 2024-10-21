@@ -2,7 +2,7 @@
 <interface>
   <requires lib="gtk" version="4.10" />
   <requires lib="Adw" version="1.0" />
-  <template class="AlertDialog" parent="AdwAlertDialog">
+  <template class="ConfirmDeleteAll" parent="AdwAlertDialog">
     <property name="heading" translatable="yes">Delete saved colors</property>
     <property name="body" translatable="yes">Are you sure you want to delete all the saved colors? This action is irreversible.</property>
     <property name="default-response">delete</property>
@@ -15,6 +15,6 @@
       name="response"
       handler="responseHandler"
       swapped="no"
-      object="AlertDialog" />
+      object="ConfirmDeleteAll" />
   </template>
 </interface>

@@ -5,7 +5,8 @@
     <file>application.js</file>
     <file>window.js</file>
     <file>preferences.js</file>
-    <file>alert-dialog.js</file>
+    <file>confirm-delete-all.js</file>
+    <file>confirm-delete-one.js</file>
     <file>utils/utils.js</file>
     <file>utils/color.js</file>
     <file>utils/saved-color.js</file>

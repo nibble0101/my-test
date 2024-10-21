@@ -19,6 +19,13 @@ export const Color = GObject.registerClass(
         GObject.ParamFlags.READWRITE,
         ""
       ),
+      key: GObject.ParamSpec.string(
+        "key",
+        "Key",
+        "Key used in the color object",
+        GObject.ParamFlags.READWRITE,
+        ""
+      ),
       color_variant_type: GObject.param_spec_variant(
         "color_variant_type",
         "colorVariantType",
@@ -30,10 +37,11 @@ export const Color = GObject.registerClass(
     },
   },
   class EvenNumbers extends GObject.Object {
-    constructor(format, color) {
+    constructor(format, color, key) {
       super();
       this.format = format;
       this.color = color;
+      this.key = key;
       this.color_variant_type = GLib.Variant.new_string(color);
     }
   }
