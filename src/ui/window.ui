@@ -38,7 +38,6 @@
                         <property name="orientation">vertical</property>
                         <property name="halign">3</property>
                         <style>
-                          <class name="eye-dropper-color-picker-box" />
                           <class name="margin" />
                         </style>
                         <child>
