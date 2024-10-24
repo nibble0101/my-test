@@ -35,10 +35,10 @@ import { ConfirmDeleteOne } from "./confirm-delete-one.js";
 
 const xdpPortal = Xdp.Portal.new();
 
-export const MyTestWindow = GObject.registerClass(
+export const BellaWindow = GObject.registerClass(
   {
-    GTypeName: "MyTestWindow",
-    Template: "resource:///org/mawa/mytest/window.ui",
+    GTypeName: "BellaWindow",
+    Template: "resource:///io/github/josephmawa/bella/window.ui",
     InternalChildren: [
       "pick_color_button",
       "main_stack",
@@ -80,7 +80,7 @@ export const MyTestWindow = GObject.registerClass(
       ),
     },
   },
-  class MyTestWindow extends Adw.ApplicationWindow {
+  class BellaWindow extends Adw.ApplicationWindow {
     constructor(application) {
       super({ application });
       this.init();
@@ -91,7 +91,7 @@ export const MyTestWindow = GObject.registerClass(
         this.backToHomePageHandler
       );
 
-      this.settings = Gio.Settings.new("org.mawa.mytest");
+      this.settings = Gio.Settings.new("io.github.josephmawa.bella");
       this.settings.bind(
         "window-width",
         this,
@@ -174,7 +174,7 @@ export const MyTestWindow = GObject.registerClass(
 
     init = () => {
       const cssProvider = new Gtk.CssProvider();
-      cssProvider.load_from_resource("org/mawa/mytest/styles/index.css");
+      cssProvider.load_from_resource("io/github/josephmawa/bella/styles/index.css");
 
       Gtk.StyleContext.add_provider_for_display(
         this.display,

@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=my-test
-Exec=org.mawa.mytest
-Icon=org.mawa.mytest
+Exec=io.github.josephmawa.bella
+Icon=io.github.josephmawa.bella
 Terminal=false
 Type=Application
 Categories=GTK;

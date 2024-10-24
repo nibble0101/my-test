@@ -1,6 +1,6 @@
 desktop_file = i18n.merge_file(
-        input: 'org.mawa.mytest.desktop.in',
-       output: 'org.mawa.mytest.desktop',
+        input: 'io.github.josephmawa.bella.desktop.in',
+       output: 'io.github.josephmawa.bella.desktop',
          type: 'desktop',
        po_dir: '../po',
       install: true,
@@ -13,8 +13,8 @@ if desktop_utils.found()
 endif
 
 appstream_file = i18n.merge_file(
-        input: 'org.mawa.mytest.appdata.xml.in',
-       output: 'org.mawa.mytest.appdata.xml',
+        input: 'io.github.josephmawa.bella.appdata.xml.in',
+       output: 'io.github.josephmawa.bella.appdata.xml',
        po_dir: '../po',
       install: true,
   install_dir: join_paths(get_option('datadir'), 'appdata')
@@ -25,7 +25,7 @@ if appstream_util.found()
   test('Validate appstream file', appstream_util, args: ['validate', appstream_file])
 endif
 
-install_data('org.mawa.mytest.gschema.xml',
+install_data('io.github.josephmawa.bella.gschema.xml',
   install_dir: join_paths(get_option('datadir'), 'glib-2.0/schemas')
 )
 

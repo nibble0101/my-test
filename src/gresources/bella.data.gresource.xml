@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/org/mawa/mytest">
+  <gresource prefix="/io/github/josephmawa/bella">
     <file preprocess="xml-stripblanks">ui/window.ui</file>
     <file preprocess="xml-stripblanks">ui/help-overlay.ui</file>
   </gresource>

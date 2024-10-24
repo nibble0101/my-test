@@ -24,7 +24,7 @@ import Gtk from "gi://Gtk?version=4.0";
 import Adw from "gi://Adw";
 import GLib from "gi://GLib";
 
-import { MyTestWindow } from "./window.js";
+import { BellaWindow } from "./window.js";
 
 pkg.initGettext();
 pkg.initFormat();
@@ -37,8 +37,8 @@ export const savedColorsFile = Gio.File.new_for_path(
   ])
 );
 
-export const MyTestApplication = GObject.registerClass(
-  class MyTestApplication extends Adw.Application {
+export const BellaApplication = GObject.registerClass(
+  class BellaApplication extends Adw.Application {
     constructor() {
       super({
         application_id: pkg.name,
@@ -51,7 +51,7 @@ export const MyTestApplication = GObject.registerClass(
     vfunc_activate() {
       let { active_window } = this;
 
-      if (!active_window) active_window = new MyTestWindow(this);
+      if (!active_window) active_window = new BellaWindow(this);
 
       active_window.present();
     }
@@ -71,7 +71,7 @@ export const MyTestApplication = GObject.registerClass(
 
     showAbout = () => {
       const builder = Gtk.Builder.new_from_resource(
-        "/org/mawa/mytest/about-dialog.ui"
+        "/io/github/josephmawa/bella/about-dialog.ui"
       );
 
       const aboutDialog = builder.get_object("about_dialog");

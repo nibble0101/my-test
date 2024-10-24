@@ -1,9 +1,9 @@
 {
-  "app-id": "org.mawa.mytest",
+  "app-id": "io.github.josephmawa.bella",
   "runtime": "org.gnome.Platform",
   "runtime-version": "47",
   "sdk": "org.gnome.Sdk",
-  "command": "org.mawa.mytest",
+  "command": "io.github.josephmawa.bella",
   "finish-args": [
     "--share=network",
     "--share=ipc",
@@ -42,7 +42,7 @@
       ]
     },
     {
-      "name": "my-test",
+      "name": "bella",
       "builddir": true,
       "buildsystem": "meson",
       "sources": [

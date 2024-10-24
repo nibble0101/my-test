@@ -7,7 +7,7 @@ import { colorFormats } from "./utils/utils.js";
 export const MyPreferencesDialog = GObject.registerClass(
   {
     GTypeName: "MyPreferencesDialog",
-    Template: "resource:///org/mawa/mytest/preferences.ui",
+    Template: "resource:///io/github/josephmawa/bella/preferences.ui",
     InternalChildren: ["system", "dark", "light", "colorFormatSettings"],
     Properties: {
       theme: GObject.ParamSpec.string(
@@ -30,7 +30,7 @@ export const MyPreferencesDialog = GObject.registerClass(
     constructor(options = {}) {
       super(options);
 
-      this.settings = Gio.Settings.new("org.mawa.mytest");
+      this.settings = Gio.Settings.new("io.github.josephmawa.bella");
       this.settings.bind(
         "preferred-theme",
         this,

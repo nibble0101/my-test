@@ -1,6 +1,6 @@
 # Bella
 
-A simple color picker.
+A simple eye dropper and color picker.
 
 <p align="center">
   <img src="./images/color-picker-view-dark.png" alt="Bella color picker dark theme" width="872" height="666"/>

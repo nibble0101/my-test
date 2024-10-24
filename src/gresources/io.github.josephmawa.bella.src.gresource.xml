@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/org/mawa/mytest/js">
+  <gresource prefix="/io/github/josephmawa/bella/js">
     <file>main.js</file>
     <file>application.js</file>
     <file>window.js</file>

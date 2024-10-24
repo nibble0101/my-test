@@ -1,4 +1,4 @@
-application_id = 'org.mawa.mytest'
+application_id = 'io.github.josephmawa.bella'
 
 scalable_dir = join_paths('hicolor', 'scalable', 'apps')
 install_data(

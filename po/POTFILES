@@ -1,6 +1,6 @@
-data/org.mawa.mytest.desktop.in
-data/org.mawa.mytest.appdata.xml.in
-data/org.mawa.mytest.gschema.xml
+data/io.github.josephmawa.desktop.in
+data/io.github.josephmawa.appdata.xml.in
+data/io.github.josephmawa.gschema.xml
 src/main.js
 src/window.js
 src/window.ui

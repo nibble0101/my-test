@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="my-test">
-  <schema id="org.mawa.mytest" path="/org/mawa/mytest/">
+  <schema id="io.github.josephmawa.bella" path="/io/github/josephmawa/bella/">
     <key name="window-width" type="i">
       <default>600</default>
     </key>

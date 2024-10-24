@@ -1,1 +1,1 @@
-i18n.gettext('my-test', preset: 'glib')
+i18n.gettext('bella', preset: 'glib')

@@ -18,9 +18,9 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import { MyTestApplication } from "./application.js";
+import { BellaApplication } from "./application.js";
 
 export function main(argv) {
-  const application = new MyTestApplication();
+  const application = new BellaApplication();
   return application.runAsync(argv);
 }
