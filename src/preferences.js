@@ -4,10 +4,10 @@ import Gio from "gi://Gio";
 import { ConfirmDeleteAll } from "./confirm-delete-all.js";
 import { colorFormats } from "./utils/utils.js";
 
-export const MyPreferencesDialog = GObject.registerClass(
+export const BellaPreferencesDialog = GObject.registerClass(
   {
-    GTypeName: "MyPreferencesDialog",
-    Template: "resource:///io/github/josephmawa/bella/preferences.ui",
+    GTypeName: "BellaPreferencesDialog",
+    Template: "resource:///io/github/josephmawa/Bella/preferences.ui",
     InternalChildren: ["system", "dark", "light", "colorFormatSettings"],
     Properties: {
       theme: GObject.ParamSpec.string(
@@ -26,11 +26,11 @@ export const MyPreferencesDialog = GObject.registerClass(
       ),
     },
   },
-  class MyPreferencesDialog extends Adw.PreferencesDialog {
+  class BellaPreferencesDialog extends Adw.PreferencesDialog {
     constructor(options = {}) {
       super(options);
 
-      this.settings = Gio.Settings.new("io.github.josephmawa.bella");
+      this.settings = Gio.Settings.new("io.github.josephmawa.Bella");
       this.settings.bind(
         "preferred-theme",
         this,

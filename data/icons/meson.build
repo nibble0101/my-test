@@ -1,4 +1,4 @@
-application_id = 'io.github.josephmawa.bella'
+application_id = 'io.github.josephmawa.Bella'
 
 scalable_dir = join_paths('hicolor', 'scalable', 'apps')
 install_data(

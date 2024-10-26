@@ -29,7 +29,7 @@ import GLib from "gi://GLib";
 import { getColor, getHsv, colorFormats } from "./utils/utils.js";
 import { Color } from "./utils/color.js";
 import { SavedColor } from "./utils/saved-color.js";
-import { MyPreferencesDialog } from "./preferences.js";
+import { BellaPreferencesDialog } from "./preferences.js";
 import { savedColorsFile } from "./application.js";
 import { ConfirmDeleteOne } from "./confirm-delete-one.js";
 
@@ -38,7 +38,7 @@ const xdpPortal = Xdp.Portal.new();
 export const BellaWindow = GObject.registerClass(
   {
     GTypeName: "BellaWindow",
-    Template: "resource:///io/github/josephmawa/bella/window.ui",
+    Template: "resource:///io/github/josephmawa/Bella/window.ui",
     InternalChildren: [
       "pick_color_button",
       "main_stack",
@@ -91,7 +91,7 @@ export const BellaWindow = GObject.registerClass(
         this.backToHomePageHandler
       );
 
-      this.settings = Gio.Settings.new("io.github.josephmawa.bella");
+      this.settings = Gio.Settings.new("io.github.josephmawa.Bella");
       this.settings.bind(
         "window-width",
         this,
@@ -174,7 +174,7 @@ export const BellaWindow = GObject.registerClass(
 
     init = () => {
       const cssProvider = new Gtk.CssProvider();
-      cssProvider.load_from_resource("io/github/josephmawa/bella/styles/index.css");
+      cssProvider.load_from_resource("io/github/josephmawa/Bella/styles/index.css");
 
       Gtk.StyleContext.add_provider_for_display(
         this.display,
@@ -223,7 +223,7 @@ export const BellaWindow = GObject.registerClass(
       });
 
       showPreferencesWindowAction.connect("activate", () => {
-        const preferencesWindow = new MyPreferencesDialog();
+        const preferencesWindow = new BellaPreferencesDialog();
 
         preferencesWindow.present(this);
       });
