@@ -2,7 +2,7 @@
 <interface>
     <requires lib="Adw" version="1.5" />
     <object class="AdwAboutDialog" id="about_dialog">
-        <property name="application-icon">io.github.josephmawa.bella</property>
+        <property name="application-icon">io.github.josephmawa.Bella</property>
         <property name="application-name" translatable="yes">Bella</property>
         <property name="developer-name">Joseph Mawa</property>
         <property name="version">0.1.0</property>

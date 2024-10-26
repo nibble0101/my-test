@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=my-test
-Exec=io.github.josephmawa.bella
-Icon=io.github.josephmawa.bella
+Exec=io.github.josephmawa.Bella
+Icon=io.github.josephmawa.Bella
 Terminal=false
 Type=Application
 Categories=GTK;

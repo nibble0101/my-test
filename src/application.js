@@ -71,7 +71,7 @@ export const BellaApplication = GObject.registerClass(
 
     showAbout = () => {
       const builder = Gtk.Builder.new_from_resource(
-        "/io/github/josephmawa/bella/about-dialog.ui"
+        "/io/github/josephmawa/Bella/about-dialog.ui"
       );
 
       const aboutDialog = builder.get_object("about_dialog");
