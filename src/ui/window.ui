@@ -21,7 +21,7 @@
                         <property name="centering-policy">1</property>
                         <property name="title-widget">
                           <object class="AdwWindowTitle">
-                            <property name="title" translatable="yes">Bella</property>
+                            <property name="title">Bella</property>
                           </object>
                         </property>
                         <child type="end">
@@ -56,7 +56,7 @@
                                 <child>
                                   <object class="GtkStackPage">
                                     <property name="name">eye_dropper_stack_page</property>
-                                    <property name="title">Eye Dropper</property>
+                                    <property name="title" translatable="yes">Eye Dropper</property>
                                     <property name="child">
                                       <object class="GtkBox">
                                         <style>
@@ -84,7 +84,7 @@
                                 <child>
                                   <object class="GtkStackPage">
                                     <property name="name">saved_colors_stack_page</property>
-                                    <property name="title">Saved Colors</property>
+                                    <property name="title" translatable="yes">Saved Colors</property>
                                     <property name="child">
                                       <object class="GtkBox">
                                         <property name="orientation">vertical</property>
@@ -157,7 +157,7 @@
                                                                 </property>
                                                                 <child>
                                                                   <object class="GtkColumnViewColumn">
-                                                                    <property name="title">Color</property>
+                                                                    <property name="title" translatable="yes">Color</property>
                                                                     <property name="factory">
                                                                       <object class="GtkBuilderListItemFactory">
                                                                         <property name="resource">/io/github/josephmawa/Bella/saved-color-table-columns/color.ui</property>
@@ -167,7 +167,7 @@
                                                                 </child>
                                                                 <child>
                                                                   <object class="GtkColumnViewColumn">
-                                                                    <property name="title">Actions</property>
+                                                                    <property name="title" translatable="yes">Actions</property>
                                                                     <property name="factory">
                                                                       <object class="GtkBuilderListItemFactory">
                                                                         <property name="resource">/io/github/josephmawa/Bella/saved-color-table-columns/actions.ui</property>
@@ -253,7 +253,7 @@
                                 <property name="dialog">
                                   <object class="GtkColorDialog">
                                     <property name="modal">true</property>
-                                    <property name="title">Modify color or select new one</property>
+                                    <property name="title" translatable="yes">Modify color or select new one</property>
                                     <property name="with-alpha">false</property>
                                   </object>
                                 </property>
@@ -279,7 +279,7 @@
                                 </property>
                                 <child>
                                   <object class="GtkColumnViewColumn">
-                                    <property name="title">Color Format</property>
+                                    <property name="title" translatable="yes">Color Format</property>
                                     <property name="factory">
                                       <object class="GtkBuilderListItemFactory">
                                         <property name="resource">/io/github/josephmawa/Bella/color-format-table-columns/format.ui</property>
@@ -289,7 +289,7 @@
                                 </child>
                                 <child>
                                   <object class="GtkColumnViewColumn">
-                                    <property name="title">Color</property>
+                                    <property name="title" translatable="yes">Color</property>
                                     <property name="factory">
                                       <object class="GtkBuilderListItemFactory">
                                         <property name="resource">/io/github/josephmawa/Bella/color-format-table-columns/color.ui</property>
@@ -299,7 +299,7 @@
                                 </child>
                                 <child>
                                   <object class="GtkColumnViewColumn">
-                                    <property name="title">Action</property>
+                                    <property name="title" translatable="yes">Action</property>
                                     <property name="factory">
                                       <object class="GtkBuilderListItemFactory">
                                         <property name="resource">/io/github/josephmawa/Bella/color-format-table-columns/actions.ui</property>
