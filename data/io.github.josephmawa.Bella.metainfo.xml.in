@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.josephmawa.Bella</id>
+
+  <name>Bella</name>
+  <developer id="io.github.josephmawa">
+    <name>Joseph Mawa</name>
+  </developer>
+  <summary>Pick color from the screen in any format</summary>
+
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+
+  <description>
+    <p>You can use Bella to pick color from the screen in one of the common color formats</p>
+    <p>Pick color from the screen</p>
+    <p>Save the picked color</p>
+    <p>Modify the picked color</p>
+    <p>Switch to dark, light or system mode</p>
+  </description>
+  <categories>
+    <category>Development</category>
+  </categories>
+
+  <keywords>
+    <keyword>color</keyword>
+    <keyword>color picker</keyword>
+    <keyword>eye dropper</keyword>
+    <keyword>development</keyword>
+  </keywords>
+
+  <launchable type="desktop-id">io.github.josephmawa.Bella.desktop</launchable>
+</component>
